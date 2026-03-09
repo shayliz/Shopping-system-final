@@ -155,7 +155,7 @@ export function Checkout({ isOpen, onClose }: CheckoutProps) {
                       {item.name} x {item.quantity}
                     </span>
                     <span className="font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ₹{(item.price * item.quantity).toFixed(2)}
                     </span>
                   </div>
                 ))}
@@ -163,7 +163,7 @@ export function Checkout({ isOpen, onClose }: CheckoutProps) {
               <div className="border-t pt-2 flex justify-between text-lg font-bold">
                 <span>Total:</span>
                 <span className="text-blue-600">
-                  ${getCartTotal().toFixed(2)}
+                  ₹{getCartTotal().toFixed(2)}
                 </span>
               </div>
             </div>

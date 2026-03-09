@@ -81,7 +81,7 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
               </div>
 
               <div className="text-4xl font-bold text-blue-600 mb-6">
-                ${product.price.toFixed(2)}
+                ₹{product.price.toFixed(2)}
               </div>
 
               <div className="flex items-center gap-4 mb-6">

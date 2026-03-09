@@ -64,7 +64,7 @@ export function Cart({ isOpen, onClose, onCheckout }: CartProps) {
                       {item.name}
                     </h3>
                     <p className="text-blue-600 font-bold mb-2">
-                      ${item.price.toFixed(2)}
+                      ₹{item.price.toFixed(2)}
                     </p>
 
                     <div className="flex items-center gap-2">
@@ -104,7 +104,7 @@ export function Cart({ isOpen, onClose, onCheckout }: CartProps) {
               <div className="flex justify-between items-center text-lg">
                 <span className="text-gray-600">Subtotal:</span>
                 <span className="font-semibold text-gray-900">
-                  ${getCartTotal().toFixed(2)}
+                  ₹{getCartTotal().toFixed(2)}
                 </span>
               </div>
 

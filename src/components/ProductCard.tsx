@@ -58,7 +58,7 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
 
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-blue-600">
-            ${product.price.toFixed(2)}
+            ₹{product.price.toFixed(2)}
           </span>
 
           <button
