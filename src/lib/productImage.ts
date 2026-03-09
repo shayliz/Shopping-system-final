@@ -18,11 +18,11 @@ function createPlaceholderImage(label: string): string {
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
-const fallbackByName: Record<string, string> = {
-  'portable bluetooth speaker': createPlaceholderImage(
-    'Portable Bluetooth Speaker'
-  ),
-  'portable power bank': createPlaceholderImage('Portable Power Bank'),
+const realImageByName: Record<string, string> = {
+  'portable bluetooth speaker':
+    'https://upload.wikimedia.org/wikipedia/commons/7/7e/Bluetooth_Speakers_%2841561673055%29.jpg',
+  'portable power bank':
+    'https://upload.wikimedia.org/wikipedia/commons/8/83/USB_power_bank.jpg',
 };
 
 export function getProductImageSrc(name: string, imageUrl: string): string {
@@ -30,9 +30,8 @@ export function getProductImageSrc(name: string, imageUrl: string): string {
     return imageUrl;
   }
 
-  return (
-    fallbackByName[name.trim().toLowerCase()] || createPlaceholderImage(name)
-  );
+  const normalizedName = name.trim().toLowerCase();
+  return realImageByName[normalizedName] || createPlaceholderImage(name);
 }
 
 export function onProductImageError(
@@ -40,10 +39,16 @@ export function onProductImageError(
   name: string
 ) {
   const image = event.currentTarget;
-  const fallback =
-    fallbackByName[name.trim().toLowerCase()] || createPlaceholderImage(name);
+  const normalizedName = name.trim().toLowerCase();
+  const realFallback = realImageByName[normalizedName];
+  const placeholderFallback = createPlaceholderImage(name);
 
-  if (image.src !== fallback) {
-    image.src = fallback;
+  if (realFallback && image.src !== realFallback) {
+    image.src = realFallback;
+    return;
+  }
+
+  if (image.src !== placeholderFallback) {
+    image.src = placeholderFallback;
   }
 }
