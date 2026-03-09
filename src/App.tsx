@@ -5,7 +5,7 @@ import { ProductCard } from './components/ProductCard';
 import { ProductDetail } from './components/ProductDetail';
 import { Cart } from './components/Cart';
 import { Checkout } from './components/Checkout';
-import { supabase } from './lib/supabase';
+import { supabase, supabaseConfigError } from './lib/supabase';
 import type { Product } from './lib/database.types';
 import { Filter, Search, AlertCircle } from 'lucide-react';
 
@@ -25,6 +25,12 @@ function AppContent() {
 
 
   const fetchProducts = async () => {
+    if (!supabase) {
+      setError(supabaseConfigError ?? 'Supabase is not configured.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       setError(null);
       const { data, error: dbError } = await supabase
