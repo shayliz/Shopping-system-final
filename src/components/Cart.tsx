@@ -1,5 +1,6 @@
 import { X, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { getProductImageSrc, onProductImageError } from '../lib/productImage';
 
 interface CartProps {
   isOpen: boolean;
@@ -52,8 +53,9 @@ export function Cart({ isOpen, onClose, onCheckout }: CartProps) {
                   className="flex gap-4 bg-gray-50 p-4 rounded-lg"
                 >
                   <img
-                    src={item.image_url}
+                    src={getProductImageSrc(item.name, item.image_url)}
                     alt={item.name}
+                    onError={(event) => onProductImageError(event, item.name)}
                     className="w-20 h-20 object-cover rounded-lg"
                   />
 

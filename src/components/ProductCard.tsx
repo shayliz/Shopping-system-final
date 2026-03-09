@@ -1,6 +1,7 @@
 import { ShoppingCart, Star } from 'lucide-react';
 import type { Product } from '../lib/database.types';
 import { useCart } from '../context/CartContext';
+import { getProductImageSrc, onProductImageError } from '../lib/productImage';
 
 interface ProductCardProps {
   product: Product;
@@ -22,8 +23,9 @@ export function ProductCard({ product, onViewDetails }: ProductCardProps) {
     >
       <div className="relative overflow-hidden aspect-square">
         <img
-          src={product.image_url}
+          src={getProductImageSrc(product.name, product.image_url)}
           alt={product.name}
+          onError={(event) => onProductImageError(event, product.name)}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
         {product.stock < 10 && product.stock > 0 && (

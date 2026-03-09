@@ -2,6 +2,7 @@ import { X, ShoppingCart, Star, Package } from 'lucide-react';
 import type { Product } from '../lib/database.types';
 import { useCart } from '../context/CartContext';
 import { useState } from 'react';
+import { getProductImageSrc, onProductImageError } from '../lib/productImage';
 
 interface ProductDetailProps {
   product: Product;
@@ -36,8 +37,9 @@ export function ProductDetail({ product, onClose }: ProductDetailProps) {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="aspect-square rounded-xl overflow-hidden">
               <img
-                src={product.image_url}
+                src={getProductImageSrc(product.name, product.image_url)}
                 alt={product.name}
+                onError={(event) => onProductImageError(event, product.name)}
                 className="w-full h-full object-cover"
               />
             </div>
